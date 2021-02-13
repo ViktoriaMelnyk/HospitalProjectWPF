@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="384" Width="560">
+    <Grid Margin="0,0,-0.4,0" Background="#FF009245" >
+
+
+        <Grid HorizontalAlignment="Left" Height="325" Margin="20,20,20,20" VerticalAlignment="Top" Width="519" Background="White">
+            <Image x:Name="Logo"  HorizontalAlignment="Left" Height="138" Margin="10,0,0,0" VerticalAlignment="Top" Width="144" Source="/img/logo.png" />
+            <TextBox x:Name="Password_input" HorizontalAlignment="Left" Height="23" Margin="225,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" FontFamily="Bodoni MT"/>
+            <Label Content="Login" HorizontalAlignment="Left" Margin="155,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.293,0.452" Height="29" FontFamily="Bodoni MT"/>
+            <Button x:Name="Lgin_btn" Content="Login" HorizontalAlignment="Left" Margin="240,272,0,0" VerticalAlignment="Top" Width="54" Height="20" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT"/>
+            <Button x:Name="Exit_btn" Content="Exit" HorizontalAlignment="Left" Margin="320,272,0,0" VerticalAlignment="Top" Width="54" Height="20" Background="Red" Foreground="White" FontFamily="Bodoni MT"/>
+            <Label Content="Password" HorizontalAlignment="Left" Margin="157,216,0,0" VerticalAlignment="Top" Height="23" FontFamily="Bodoni MT"/>
+            <TextBox x:Name="Login_input" HorizontalAlignment="Left" Height="23" Margin="225,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
+            <Image HorizontalAlignment="Left" Height="77" Margin="144,31,0,0" VerticalAlignment="Top" Width="328" Source="/img/green.png"/>
+        </Grid>
+
+
+
     </Grid>
 </Window>
