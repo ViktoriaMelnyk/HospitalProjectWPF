@@ -1,0 +1,27 @@
+﻿<Window x:Class="HospitalProjektWPF.Booking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalProjektWPF"
+        mc:Ignorable="d"
+        Title="Booking" Height="450" Width="800">
+    <Grid Background="#FF009245">
+        <Image HorizontalAlignment="Left" Height="100" Margin="667,12,0,0" VerticalAlignment="Top" Width="100" Source="/img/medical-history.png"/>
+        <DataGrid x:Name="Rezervations_table" Margin="371,138,23,67"/>
+        <Label Content="Rezerwacja Wizyty" HorizontalAlignment="Center" Margin="0,43,0,0" VerticalAlignment="Top" Width="340" FontSize="26" FontFamily="Bodoni MT" Height="49" HorizontalContentAlignment="Center" Background="White"/>
+        <Label Content="Id Rezerwacji" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
+        <Label Content="Id Pacjenta" HorizontalAlignment="Left" Margin="10,188,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="14" FontFamily="Bodoni MT"/>
+        <Label Content="Id Lekarza" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="14" FontFamily="Bodoni MT"/>
+        <Label Content="Godzina Wizyty" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
+        <Label Content="Data Wizyty" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
+        <TextBlock x:Name="IdVisit_input" HorizontalAlignment="Left" Margin="146,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
+        <TextBlock x:Name="IdDoc_input" HorizontalAlignment="Left" Margin="146,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
+        <TextBlock x:Name="IdPat_input" HorizontalAlignment="Left" Margin="146,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
+        <TextBlock x:Name="PatEmail_input" HorizontalAlignment="Left" Margin="146,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
+        <Button x:Name="Reserv_btn" Content="Zarezerwuj" HorizontalAlignment="Center" Margin="0,387,0,0" VerticalAlignment="Top" Width="152" Height="26" Background="Red"  Foreground="White" FontFamily="Bodoni MT" FontSize="16"/>
+        <DatePicker x:Name="PatBirthDate_picker" HorizontalAlignment="Left" Margin="144,286,0,0" VerticalAlignment="Top" Width="200" Height="32" Opacity="0.9" FontSize="16"/>
+        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="30,43,0,0" VerticalAlignment="Top" Width="98" Height="37" Background="#FFFF5B62" Foreground="White" FontFamily="Bodoni MT" FontSize="16" RenderTransformOrigin="0.5,0.5"/>
+
+    </Grid>
+</Window>
