@@ -1,0 +1,817 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PrzychodniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingVisit">
+          <Key>
+            <PropertyRef Name="idBV" />
+          </Key>
+          <Property Name="idBV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDoc" Type="int" />
+          <Property Name="idPat" Type="int" />
+          <Property Name="dateOfReserv" Type="date" />
+          <Property Name="timeOfVisit" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Diseases">
+          <Key>
+            <PropertyRef Name="idDis" />
+          </Key>
+          <Property Name="idDis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiseaseCode" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="idDoc" />
+          </Key>
+          <Property Name="idDoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PESEL" Type="char" MaxLength="11" />
+          <Property Name="phoneNb" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="specializations" Type="int" />
+        </EntityType>
+        <EntityType Name="HospitalInfo">
+          <Key>
+            <PropertyRef Name="idHosInf" />
+          </Key>
+          <Property Name="idHosInf" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NIP" Type="int" Nullable="false" />
+          <Property Name="REGON" Type="int" Nullable="false" />
+          <Property Name="KRS" Type="int" />
+          <Property Name="adress" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="phoneNb" Type="nvarchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nurses">
+          <Key>
+            <PropertyRef Name="idNurs" />
+          </Key>
+          <Property Name="idNurs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PESEL" Type="char" MaxLength="11" />
+          <Property Name="phoneNb" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="specialization" Type="int" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="idPat" />
+          </Key>
+          <Property Name="idPat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthDate" Type="date" Nullable="false" />
+          <Property Name="PESEL" Type="char" MaxLength="11" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="postalCode" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="street_adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneNb" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrescriptionDrugs">
+          <Key>
+            <PropertyRef Name="idPrDr" />
+          </Key>
+          <Property Name="idPrDr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Prescriptions">
+          <Key>
+            <PropertyRef Name="idPrescr" />
+          </Key>
+          <Property Name="idPrescr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idHosInf" Type="int" />
+          <Property Name="idDoc" Type="int" />
+          <Property Name="idPrDr" Type="int" />
+          <Property Name="idPat" Type="int" />
+          <Property Name="prDate" Type="date" />
+          <Property Name="comment" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="idSpec" />
+          </Key>
+          <Property Name="idSpec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="idVis" />
+          </Key>
+          <Property Name="idVis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idDoc" Type="int" />
+          <Property Name="idPat" Type="int" />
+          <Property Name="DateOfVisit" Type="date" />
+          <Property Name="TimeOfVisit" Type="time" Precision="7" />
+          <Property Name="Symptoms" Type="nvarchar" MaxLength="200" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="200" />
+          <Property Name="idDis" Type="int" />
+          <Property Name="idPrescr" Type="int" />
+          <Property Name="sickLeave" Type="nvarchar" MaxLength="20" />
+          <Property Name="recommendations" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK__BookingVi__idDoc__59063A47">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="BookingVisit" Type="Self.BookingVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="BookingVisit">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookingVi__idPat__59FA5E80">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="BookingVisit" Type="Self.BookingVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="BookingVisit">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Doctors__special__3B75D760">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="specializations" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nurses__speciali__4316F928">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Nurses" Type="Self.Nurses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="Nurses">
+              <PropertyRef Name="specialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idDoc__4BAC3F29">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idHos__4AB81AF0">
+          <End Role="HospitalInfo" Type="Self.HospitalInfo" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalInfo">
+              <PropertyRef Name="idHosInf" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idHosInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idPat__4D94879B">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idPrD__4CA06362">
+          <End Role="PrescriptionDrugs" Type="Self.PrescriptionDrugs" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrescriptionDrugs">
+              <PropertyRef Name="idPrDr" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idPrDr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idDis__5535A963">
+          <End Role="Diseases" Type="Self.Diseases" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diseases">
+              <PropertyRef Name="idDis" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idDis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idDoc__534D60F1">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idPat__5441852A">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idPrescr__5629CD9C">
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescriptions">
+              <PropertyRef Name="idPrescr" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idPrescr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrzychodniaModelStoreContainer">
+          <EntitySet Name="BookingVisit" EntityType="Self.BookingVisit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalInfo" EntityType="Self.HospitalInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nurses" EntityType="Self.Nurses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrescriptionDrugs" EntityType="Self.PrescriptionDrugs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specializations" EntityType="Self.Specializations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BookingVi__idDoc__59063A47" Association="Self.FK__BookingVi__idDoc__59063A47">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="BookingVisit" EntitySet="BookingVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookingVi__idPat__59FA5E80" Association="Self.FK__BookingVi__idPat__59FA5E80">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="BookingVisit" EntitySet="BookingVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Doctors__special__3B75D760" Association="Self.FK__Doctors__special__3B75D760">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nurses__speciali__4316F928" Association="Self.FK__Nurses__speciali__4316F928">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Nurses" EntitySet="Nurses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idDoc__4BAC3F29" Association="Self.FK__Prescript__idDoc__4BAC3F29">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idHos__4AB81AF0" Association="Self.FK__Prescript__idHos__4AB81AF0">
+            <End Role="HospitalInfo" EntitySet="HospitalInfo" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idPat__4D94879B" Association="Self.FK__Prescript__idPat__4D94879B">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idPrD__4CA06362" Association="Self.FK__Prescript__idPrD__4CA06362">
+            <End Role="PrescriptionDrugs" EntitySet="PrescriptionDrugs" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idDis__5535A963" Association="Self.FK__Visits__idDis__5535A963">
+            <End Role="Diseases" EntitySet="Diseases" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idDoc__534D60F1" Association="Self.FK__Visits__idDoc__534D60F1">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idPat__5441852A" Association="Self.FK__Visits__idPat__5441852A">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idPrescr__5629CD9C" Association="Self.FK__Visits__idPrescr__5629CD9C">
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PrzychodniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookingVisit">
+          <Key>
+            <PropertyRef Name="idBV" />
+          </Key>
+          <Property Name="idBV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDoc" Type="Int32" />
+          <Property Name="idPat" Type="Int32" />
+          <Property Name="dateOfReserv" Type="DateTime" Precision="0" />
+          <Property Name="timeOfVisit" Type="Time" Precision="7" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK__BookingVi__idDoc__59063A47" FromRole="BookingVisit" ToRole="Doctors" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__BookingVi__idPat__59FA5E80" FromRole="BookingVisit" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Diseases">
+          <Key>
+            <PropertyRef Name="idDis" />
+          </Key>
+          <Property Name="idDis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiseaseCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__idDis__5535A963" FromRole="Diseases" ToRole="Visits" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="idDoc" />
+          </Key>
+          <Property Name="idDoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="phoneNb" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="specializations" Type="Int32" />
+          <NavigationProperty Name="BookingVisit" Relationship="Self.FK__BookingVi__idDoc__59063A47" FromRole="Doctors" ToRole="BookingVisit" />
+          <NavigationProperty Name="Specializations1" Relationship="Self.FK__Doctors__special__3B75D760" FromRole="Doctors" ToRole="Specializations" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK__Prescript__idDoc__4BAC3F29" FromRole="Doctors" ToRole="Prescriptions" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__idDoc__534D60F1" FromRole="Doctors" ToRole="Visits" />
+        </EntityType>
+        <EntityType Name="HospitalInfo">
+          <Key>
+            <PropertyRef Name="idHosInf" />
+          </Key>
+          <Property Name="idHosInf" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NIP" Type="Int32" Nullable="false" />
+          <Property Name="REGON" Type="Int32" Nullable="false" />
+          <Property Name="KRS" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNb" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK__Prescript__idHos__4AB81AF0" FromRole="HospitalInfo" ToRole="Prescriptions" />
+        </EntityType>
+        <EntityType Name="Nurses">
+          <Key>
+            <PropertyRef Name="idNurs" />
+          </Key>
+          <Property Name="idNurs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="phoneNb" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="specialization" Type="Int32" />
+          <NavigationProperty Name="Specializations" Relationship="Self.FK__Nurses__speciali__4316F928" FromRole="Nurses" ToRole="Specializations" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="idPat" />
+          </Key>
+          <Property Name="idPat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="postalCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street_adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNb" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BookingVisit" Relationship="Self.FK__BookingVi__idPat__59FA5E80" FromRole="Patients" ToRole="BookingVisit" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK__Prescript__idPat__4D94879B" FromRole="Patients" ToRole="Prescriptions" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__idPat__5441852A" FromRole="Patients" ToRole="Visits" />
+        </EntityType>
+        <EntityType Name="PrescriptionDrugs">
+          <Key>
+            <PropertyRef Name="idPrDr" />
+          </Key>
+          <Property Name="idPrDr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK__Prescript__idPrD__4CA06362" FromRole="PrescriptionDrugs" ToRole="Prescriptions" />
+        </EntityType>
+        <EntityType Name="Prescriptions">
+          <Key>
+            <PropertyRef Name="idPrescr" />
+          </Key>
+          <Property Name="idPrescr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idHosInf" Type="Int32" />
+          <Property Name="idDoc" Type="Int32" />
+          <Property Name="idPrDr" Type="Int32" />
+          <Property Name="idPat" Type="Int32" />
+          <Property Name="prDate" Type="DateTime" Precision="0" />
+          <Property Name="comment" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK__Prescript__idDoc__4BAC3F29" FromRole="Prescriptions" ToRole="Doctors" />
+          <NavigationProperty Name="HospitalInfo" Relationship="Self.FK__Prescript__idHos__4AB81AF0" FromRole="Prescriptions" ToRole="HospitalInfo" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Prescript__idPat__4D94879B" FromRole="Prescriptions" ToRole="Patients" />
+          <NavigationProperty Name="PrescriptionDrugs" Relationship="Self.FK__Prescript__idPrD__4CA06362" FromRole="Prescriptions" ToRole="PrescriptionDrugs" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__idPrescr__5629CD9C" FromRole="Prescriptions" ToRole="Visits" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="idSpec" />
+          </Key>
+          <Property Name="idSpec" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK__Doctors__special__3B75D760" FromRole="Specializations" ToRole="Doctors" />
+          <NavigationProperty Name="Nurses" Relationship="Self.FK__Nurses__speciali__4316F928" FromRole="Specializations" ToRole="Nurses" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="idVis" />
+          </Key>
+          <Property Name="idVis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idDoc" Type="Int32" />
+          <Property Name="idPat" Type="Int32" />
+          <Property Name="DateOfVisit" Type="DateTime" Precision="0" />
+          <Property Name="TimeOfVisit" Type="Time" Precision="7" />
+          <Property Name="Symptoms" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Diagnosis" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="idDis" Type="Int32" />
+          <Property Name="idPrescr" Type="Int32" />
+          <Property Name="sickLeave" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="recommendations" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Diseases" Relationship="Self.FK__Visits__idDis__5535A963" FromRole="Visits" ToRole="Diseases" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK__Visits__idDoc__534D60F1" FromRole="Visits" ToRole="Doctors" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Visits__idPat__5441852A" FromRole="Visits" ToRole="Patients" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK__Visits__idPrescr__5629CD9C" FromRole="Visits" ToRole="Prescriptions" />
+        </EntityType>
+        <Association Name="FK__BookingVi__idDoc__59063A47">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="BookingVisit" Type="Self.BookingVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="BookingVisit">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookingVi__idPat__59FA5E80">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="BookingVisit" Type="Self.BookingVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="BookingVisit">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idDis__5535A963">
+          <End Role="Diseases" Type="Self.Diseases" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diseases">
+              <PropertyRef Name="idDis" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idDis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Doctors__special__3B75D760">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="specializations" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idDoc__4BAC3F29">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idDoc__534D60F1">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="idDoc" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idHos__4AB81AF0">
+          <End Role="HospitalInfo" Type="Self.HospitalInfo" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalInfo">
+              <PropertyRef Name="idHosInf" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idHosInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nurses__speciali__4316F928">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Nurses" Type="Self.Nurses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="Nurses">
+              <PropertyRef Name="specialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idPat__4D94879B">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idPat__5441852A">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="idPat" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idPat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prescript__idPrD__4CA06362">
+          <End Role="PrescriptionDrugs" Type="Self.PrescriptionDrugs" Multiplicity="0..1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrescriptionDrugs">
+              <PropertyRef Name="idPrDr" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="idPrDr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__idPrescr__5629CD9C">
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescriptions">
+              <PropertyRef Name="idPrescr" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="idPrescr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrzychodniaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookingVisit" EntityType="Self.BookingVisit" />
+          <EntitySet Name="Diseases" EntityType="Self.Diseases" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" />
+          <EntitySet Name="HospitalInfo" EntityType="Self.HospitalInfo" />
+          <EntitySet Name="Nurses" EntityType="Self.Nurses" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" />
+          <EntitySet Name="PrescriptionDrugs" EntityType="Self.PrescriptionDrugs" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" />
+          <EntitySet Name="Specializations" EntityType="Self.Specializations" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" />
+          <AssociationSet Name="FK__BookingVi__idDoc__59063A47" Association="Self.FK__BookingVi__idDoc__59063A47">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="BookingVisit" EntitySet="BookingVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookingVi__idPat__59FA5E80" Association="Self.FK__BookingVi__idPat__59FA5E80">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="BookingVisit" EntitySet="BookingVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idDis__5535A963" Association="Self.FK__Visits__idDis__5535A963">
+            <End Role="Diseases" EntitySet="Diseases" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Doctors__special__3B75D760" Association="Self.FK__Doctors__special__3B75D760">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idDoc__4BAC3F29" Association="Self.FK__Prescript__idDoc__4BAC3F29">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idDoc__534D60F1" Association="Self.FK__Visits__idDoc__534D60F1">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idHos__4AB81AF0" Association="Self.FK__Prescript__idHos__4AB81AF0">
+            <End Role="HospitalInfo" EntitySet="HospitalInfo" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nurses__speciali__4316F928" Association="Self.FK__Nurses__speciali__4316F928">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Nurses" EntitySet="Nurses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idPat__4D94879B" Association="Self.FK__Prescript__idPat__4D94879B">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idPat__5441852A" Association="Self.FK__Visits__idPat__5441852A">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prescript__idPrD__4CA06362" Association="Self.FK__Prescript__idPrD__4CA06362">
+            <End Role="PrescriptionDrugs" EntitySet="PrescriptionDrugs" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__idPrescr__5629CD9C" Association="Self.FK__Visits__idPrescr__5629CD9C">
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PrzychodniaModelStoreContainer" CdmEntityContainer="PrzychodniaEntities">
+          <EntitySetMapping Name="BookingVisit">
+            <EntityTypeMapping TypeName="PrzychodniaModel.BookingVisit">
+              <MappingFragment StoreEntitySet="BookingVisit">
+                <ScalarProperty Name="idBV" ColumnName="idBV" />
+                <ScalarProperty Name="idDoc" ColumnName="idDoc" />
+                <ScalarProperty Name="idPat" ColumnName="idPat" />
+                <ScalarProperty Name="dateOfReserv" ColumnName="dateOfReserv" />
+                <ScalarProperty Name="timeOfVisit" ColumnName="timeOfVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diseases">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Diseases">
+              <MappingFragment StoreEntitySet="Diseases">
+                <ScalarProperty Name="idDis" ColumnName="idDis" />
+                <ScalarProperty Name="DiseaseCode" ColumnName="DiseaseCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Doctors">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="idDoc" ColumnName="idDoc" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+                <ScalarProperty Name="phoneNb" ColumnName="phoneNb" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="specializations" ColumnName="specializations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalInfo">
+            <EntityTypeMapping TypeName="PrzychodniaModel.HospitalInfo">
+              <MappingFragment StoreEntitySet="HospitalInfo">
+                <ScalarProperty Name="idHosInf" ColumnName="idHosInf" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="REGON" ColumnName="REGON" />
+                <ScalarProperty Name="KRS" ColumnName="KRS" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="phoneNb" ColumnName="phoneNb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nurses">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Nurses">
+              <MappingFragment StoreEntitySet="Nurses">
+                <ScalarProperty Name="idNurs" ColumnName="idNurs" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+                <ScalarProperty Name="phoneNb" ColumnName="phoneNb" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="specialization" ColumnName="specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="idPat" ColumnName="idPat" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street_adress" ColumnName="street_adress" />
+                <ScalarProperty Name="phoneNb" ColumnName="phoneNb" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrescriptionDrugs">
+            <EntityTypeMapping TypeName="PrzychodniaModel.PrescriptionDrugs">
+              <MappingFragment StoreEntitySet="PrescriptionDrugs">
+                <ScalarProperty Name="idPrDr" ColumnName="idPrDr" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescriptions">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Prescriptions">
+              <MappingFragment StoreEntitySet="Prescriptions">
+                <ScalarProperty Name="idPrescr" ColumnName="idPrescr" />
+                <ScalarProperty Name="idHosInf" ColumnName="idHosInf" />
+                <ScalarProperty Name="idDoc" ColumnName="idDoc" />
+                <ScalarProperty Name="idPrDr" ColumnName="idPrDr" />
+                <ScalarProperty Name="idPat" ColumnName="idPat" />
+                <ScalarProperty Name="prDate" ColumnName="prDate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializations">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Specializations">
+              <MappingFragment StoreEntitySet="Specializations">
+                <ScalarProperty Name="idSpec" ColumnName="idSpec" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visits">
+            <EntityTypeMapping TypeName="PrzychodniaModel.Visits">
+              <MappingFragment StoreEntitySet="Visits">
+                <ScalarProperty Name="idVis" ColumnName="idVis" />
+                <ScalarProperty Name="idDoc" ColumnName="idDoc" />
+                <ScalarProperty Name="idPat" ColumnName="idPat" />
+                <ScalarProperty Name="DateOfVisit" ColumnName="DateOfVisit" />
+                <ScalarProperty Name="TimeOfVisit" ColumnName="TimeOfVisit" />
+                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="idDis" ColumnName="idDis" />
+                <ScalarProperty Name="idPrescr" ColumnName="idPrescr" />
+                <ScalarProperty Name="sickLeave" ColumnName="sickLeave" />
+                <ScalarProperty Name="recommendations" ColumnName="recommendations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
