@@ -23,5 +23,12 @@ namespace HospitalProjektWPF
         {
             InitializeComponent();
         }
+
+        private void MainMenu_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu objMainMenu = new MainMenu();
+            this.Visibility = Visibility.Hidden;
+            objMainMenu.Show();
+        }
     }
 }

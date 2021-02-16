@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
         Title="MainMenu" Height="450" Width="800">
-    <Grid Background="#FF009245" >
+    <Grid Background="#FF0F7986" >
 
         <Grid HorizontalAlignment="Center" Height="189" VerticalAlignment="Center" Width="800" Background="White">
             <Label Content="Lekarze" HorizontalAlignment="Left" Margin="46,144,0,0" VerticalAlignment="Top" Width="112" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
@@ -14,28 +14,30 @@
             <Label Content="Rezerwacja Wiyty" HorizontalAlignment="Left" Margin="409,144,0,0" VerticalAlignment="Top" Width="187" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
             <Label Content="Pacjenci" HorizontalAlignment="Left" Margin="212,144,0,0" VerticalAlignment="Top" Width="164" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
             <Grid/>
-            <Button x:Name="Doctors_btn" Content="Button" HorizontalAlignment="Left" Margin="33,19,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}">
+            <Button x:Name="Doctors_btn" Content="Button" HorizontalAlignment="Left" Margin="33,19,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Doctors_btn_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/img/doctor.png"/>
+                    <ImageBrush ImageSource="doctor.png"/>
+                </Button.Background>
+
+            </Button>
+            <Button x:Name="Patients_btn1" Content="Button" HorizontalAlignment="Left" Margin="225,19,0,0" VerticalAlignment="Top" Height="120" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Patients_btn1_Click" >
+                <Button.Background>
+                    <ImageBrush ImageSource="fracture.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Patients_btn1" Content="Button" HorizontalAlignment="Left" Margin="225,19,0,0" VerticalAlignment="Top" Height="120" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+            <Button x:Name="Visits_shedule" Content="Button" HorizontalAlignment="Left" Margin="421,18,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Visits_shedule_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/img/fracture.png"/>
+                    <ImageBrush ImageSource="nurse.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Visits_shedule" Content="Button" HorizontalAlignment="Left" Margin="421,18,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}">
+            <Button x:Name="visit" Content="Button" HorizontalAlignment="Left" Margin="626,19,0,0" VerticalAlignment="Top" Height="119" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="visit_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/img/nurse.png"/>
+                    <ImageBrush ImageSource="medical-history.png"/>
                 </Button.Background>
-            </Button>
-            <Button x:Name="visit" Content="Button" HorizontalAlignment="Left" Margin="626,19,0,0" VerticalAlignment="Top" Height="119" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/medical-history.png"/>
-                </Button.Background>
+
             </Button>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="63" Margin="491,10,0,0" VerticalAlignment="Top" Width="290" Source="/img/white.png"/>
-        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="667,377,0,0" VerticalAlignment="Top" Width="98" Height="37" Background="#FFFF5B62" Foreground="White" FontFamily="Bodoni MT" FontSize="16" RenderTransformOrigin="0.5,0.5"/>
+        <Image HorizontalAlignment="Left" Height="63" Margin="491,10,0,0" VerticalAlignment="Top" Width="290" Source="white.png" />
+        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="649,355,0,0" VerticalAlignment="Top" Width="98" Height="37" Background="#FFFF5B62" Foreground="White" FontFamily="Bodoni MT" FontSize="16" RenderTransformOrigin="0.5,0.5" Click="MainMenu_btn_Click"/>
     </Grid>
 </Window>

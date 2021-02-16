@@ -195,9 +195,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="img\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="white.png" />
+    <Resource Include="doctor.png" />
+    <Resource Include="fracture.png" />
+    <Resource Include="nurse.png" />
+    <Resource Include="medical-history.png" />
+    <Resource Include="green.png" />
+    <Resource Include="cardiogram %281%29.png" />
     <Content Include="Przychodnia_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Przychodnia_model.edmx</DependentUpon>

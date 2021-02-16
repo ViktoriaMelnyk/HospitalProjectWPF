@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace HospitalProjektWPF
 {
@@ -23,6 +24,18 @@ namespace HospitalProjektWPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Exit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MainMenu_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu objMainMenu = new MainMenu();
+            this.Visibility = Visibility.Hidden;
+            objMainMenu.Show();
         }
     }
 }

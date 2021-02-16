@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
         Title="PatientsWindow" Height="634.783" Width="1053.913">
-    <Grid Background="#FF009245" Margin="0,0,0.2,-0.2">
+    <Grid Background="#FF0F7986" Margin="0,0,0.2,-0.2">
         <Grid Margin="361,0,0.2,-0.2" Background="White" Grid.RowSpan="2">
-            <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="500,530,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16"/>
+            <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="500,530,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
             <Label Content="Pacjenci" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Width="206" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center"/>
             <DataGrid x:Name="Patients_table" Margin="20,125,10,94" BorderBrush="#FF009245"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="523,10,0,0" VerticalAlignment="Top" Width="122" Source="/img/fracture.png"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="523,10,0,0" VerticalAlignment="Top" Width="122" Source="fracture.png" />
 
         </Grid>
         <Label Content="Id Pacjenta" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>

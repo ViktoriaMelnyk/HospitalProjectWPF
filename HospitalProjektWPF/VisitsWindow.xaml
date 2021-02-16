@@ -14,7 +14,7 @@
             <Button x:Name="Select_btn" Content="Szukaj" HorizontalAlignment="Left" Margin="232,62,0,0" VerticalAlignment="Top" Width="87" Height="32" Background="Red"  Foreground="White" FontFamily="Bodoni MT" FontSize="16"/>
         </Grid>
         <DataGrid x:Name="Visits_table" Margin="0,124,0,64"/>
-        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="627,388,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16"/>
+        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="627,388,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
 
     </Grid>
 </Window>
