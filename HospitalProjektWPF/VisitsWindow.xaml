@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="VisitsWindow" Height="450" Width="800">
     <Grid>
-        <Grid Height="124" VerticalAlignment="Top" Background="#FF009245">
+        <Grid Height="124" VerticalAlignment="Top" Background="#FF21D0C3">
             <Label Content="Wizyty" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="214" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center" Background="White"/>
             <Label Content="Id Wizyty" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
             <TextBlock x:Name="VisitId_input" HorizontalAlignment="Left" Margin="147,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
