@@ -5,16 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
-        Title="PatientsWindow" Height="634.783" Width="1053.913">
+        Title="PatientsWindow" Height="634.783" Width="1053.913" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="przychodniaEntitiesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:PrzychodniaEntities}, CreateList=True}"/>
+        <CollectionViewSource x:Key="przychodniaEntitiesPatientsViewSource" Source="{Binding Patients, Source={StaticResource przychodniaEntitiesViewSource}}"/>
+    </Window.Resources>
     <Grid Background="#FF0F7986" Margin="0,0,0.2,-0.2">
-        <Grid Margin="361,0,0.2,-0.2" Background="White" Grid.RowSpan="2">
+        <Grid Margin="361,0,0.2,-0.2" Background="White" Grid.RowSpan="2" DataContext="{StaticResource przychodniaEntitiesPatientsViewSource}">
             <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="500,530,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
             <Label Content="Pacjenci" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Width="206" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center"/>
-            <DataGrid x:Name="Patients_table" Margin="20,125,10,94" BorderBrush="#FF009245"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="523,10,0,0" VerticalAlignment="Top" Width="122" Source="fracture.png" />
+            <DataGrid x:Name="patientsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="31,134,28,112" RowDetailsVisibilityMode="VisibleWhenSelected" Background="#FF0F7986" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idPatColumn" Binding="{Binding idPat}" Header="id Pat" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToCells"/>
+                    <DataGridTemplateColumn x:Name="birthDateColumn" Header="birth Date" Width="SizeToCells">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding birthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="pESELColumn" Binding="{Binding PESEL}" Header="PESEL" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding gender}" Header="gender" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="postalCodeColumn" Binding="{Binding postalCode}" Header="postal Code" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="cityColumn" Binding="{Binding city}" Header="city" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="street_adressColumn" Binding="{Binding street_adress}" Header="street adress" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="phoneNbColumn" Binding="{Binding phoneNb}" Header="phone Nb" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="mailColumn" Binding="{Binding mail}" Header="mail" Width="SizeToCells"/>
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock x:Name="PatInvalidData_box" HorizontalAlignment="Left" Margin="31,517,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="207" FontSize="16" FontFamily="Bodoni MT" Foreground="#FF4A0311"/>
+
 
         </Grid>
-        <Label Content="Id Pacjenta" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
         <Label Content="Imę" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="24" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="14" FontFamily="Bodoni MT"/>
         <Label Content="Kod Posztowy" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="14" FontFamily="Bodoni MT"/>
         <Label Content="Płeć" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
@@ -25,21 +52,19 @@
         <Label Content="Miasto" HorizontalAlignment="Left" Margin="10,306,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
         <Label Content="email" HorizontalAlignment="Left" Margin="10,426,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
         <Label Content="Telefon" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Height="25" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
-        <Button x:Name="AddPatient_btn" Content="Dodaj" HorizontalAlignment="Left" Margin="44,503,0,0" VerticalAlignment="Top" Background="#FFFAD24D" BorderBrush="#FF2A2A0B" Width="84" Height="23" FontFamily="Bodoni MT" FontSize="16"/>
+        <Button x:Name="AddPatient_btn" Content="Dodaj" HorizontalAlignment="Left" Margin="44,503,0,0" VerticalAlignment="Top" Background="#FFFAD24D" BorderBrush="#FF2A2A0B" Width="84" Height="23" FontFamily="Bodoni MT" FontSize="16" Click="AddPatient_btn_Click"/>
         <Button x:Name="UpdatePanient_btn" Content="Aktualizuj" HorizontalAlignment="Left" Margin="181,503,0,0" VerticalAlignment="Top" Background="#FFFAD24D" BorderBrush="#FF2A2A0B" Width="94" Height="23" FontFamily="Bodoni MT" FontSize="16"/>
-        <TextBlock x:Name="ID_pat" HorizontalAlignment="Left" Margin="146,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatPESEL_input" HorizontalAlignment="Left" Margin="146,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatLastName_input" HorizontalAlignment="Left" Margin="146,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatName_input" HorizontalAlignment="Left" Margin="146,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
         <DatePicker x:Name="PatBirthDate_picker" HorizontalAlignment="Left" Margin="141,142,0,0" VerticalAlignment="Top" Width="201" Height="25" Opacity="0.9" FontSize="16"/>
-        <RadioButton x:Name="PatFemale_picker" Content="K" HorizontalAlignment="Left" Margin="160,228,0,0" VerticalAlignment="Top" Height="25" Foreground="White" FontSize="16" Width="28"/>
-        <RadioButton x:Name="PatMale_picker" Content="M" HorizontalAlignment="Left" Margin="268,228,0,0" VerticalAlignment="Top" Height="25" Foreground="White" FontSize="16" Width="33"/>
-        <TextBlock x:Name="PatPostalCode_input" HorizontalAlignment="Left" Margin="146,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatCity_input" HorizontalAlignment="Left" Margin="144,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatAddress_input" HorizontalAlignment="Left" Margin="146,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatPhone_input" HorizontalAlignment="Left" Margin="146,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
-        <TextBlock x:Name="PatEmail_input" HorizontalAlignment="Left" Margin="146,424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontSize="16" Opacity="0.7" Background="White" Height="26" FontFamily="Bodoni MT"/>
         <Button x:Name="DeletePat_btn" Content="Usuń" HorizontalAlignment="Left" Margin="120,545,0,-1.2" VerticalAlignment="Top" Background="#FFFF5B62" BorderBrush="#FF2A2A0B" Width="84" Height="23" FontFamily="Bodoni MT" FontSize="16" Foreground="White" Grid.RowSpan="2"/>
+        <TextBox x:Name="Name_input" HorizontalAlignment="Left" Height="24" Margin="146,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="PostalCode_input" HorizontalAlignment="Left" Height="25" Margin="146,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="PESEL_input" HorizontalAlignment="Left" Height="25" Margin="144,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="LastName_input" HorizontalAlignment="Left" Height="25" Margin="146,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="email_input" HorizontalAlignment="Left" Height="24" Margin="146,426,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="Phone_input" HorizontalAlignment="Left" Height="25" Margin="146,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="Street_input" HorizontalAlignment="Left" Height="24" Margin="146,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="City_input" HorizontalAlignment="Left" Height="25" Margin="146,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
+        <TextBox x:Name="Gender_input" HorizontalAlignment="Left" Height="25" Margin="146,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" FontFamily="Bodoni MT" FontSize="16" Opacity="0.7"/>
 
 
     </Grid>
