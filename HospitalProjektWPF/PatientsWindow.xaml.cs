@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace HospitalProjektWPF
 {
@@ -55,6 +56,11 @@ namespace HospitalProjektWPF
                 PatInvalidData_box.Text = "Proszę podać nazwisko!";
                 return;
             }
+            if (PatBirthDate_picker.SelectedDate == null)
+            {
+                PatInvalidData_box.Text = "Proszę podać datę urodzenia";
+                return;
+            }
             string pesel = PESEL_input.Text;
             if (pesel == "" || pesel.Length != 11)
             {
@@ -66,13 +72,54 @@ namespace HospitalProjektWPF
                 PatInvalidData_box.Text = "Pacjent z takim numerem PESEL już jest w systemie";
                 return;
             }
+            string gender = Gender_input.Text;
+            if (gender == "" || gender.Length != 1)
+            {
+                PatInvalidData_box.Text = "Proszę prawidłowo wpisać płeć K lub M";
+                return;
+            }
+            string postalCode = PostalCode_input.Text;
+            if (postalCode == "" || postalCode.Length != 5)
+            {
+                PatInvalidData_box.Text = "Proszę podać prawidłowy kod pocztowy";
+                return;
+            }
+            string city = City_input.Text;
+            if (city == "")
+            {
+                PatInvalidData_box.Text = "Proszę podać miasto";
+                return;
+            }
+            string adress = Street_input.Text;
+            if (adress == "")
+            {
+                PatInvalidData_box.Text = "Proszę podać adres";
+                return;
+            }
+
             string phone = Phone_input.Text;
-            if (phone == "")
+            if (phone == "" || phone.Length != 9)
             {
                 PatInvalidData_box.Text = "Proszę podać prawidłowy numer telefonu";
                 return;
             }
-         
+            if (patientsTable.Where(d => d.phoneNb == phone).ToList().Count == 1)
+            {
+                PatInvalidData_box.Text = "Lekarz z takim numerem telefonu już jest w systemie";
+                return;
+            }
+
+            if (email_input.Text.Length == 0 || !Regex.IsMatch(email_input.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+            {
+                PatInvalidData_box.Text = "Proszę podać prawidłowy adres mailowy";
+                return;
+            }
+            
+           
+
+            
+           
+           
 
             Patients patient = new Patients()
             {
@@ -96,7 +143,7 @@ namespace HospitalProjektWPF
             db.SaveChanges();
             Clear();
             patientsList();
-            MessageBox.Show("Dodano nowego lekarza");
+            MessageBox.Show("Dodano nowego pacjenta");
         }
         private void MainMenu_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -109,6 +156,7 @@ namespace HospitalProjektWPF
             var db = new PrzychodniaEntities();
             patientsDataGrid.AutoGenerateColumns = false;
             var tmp = db.Patients.ToList().Select(a => new {
+                idPat =a.idPat,
                 FirstName = a.FirstName,
                 LastName = a.LastName,
                 PESEL = a.PESEL,
@@ -121,6 +169,62 @@ namespace HospitalProjektWPF
                 birthDate = a.birthDate.ToString("yyyy-MM-dd")
             }).ToList();
             patientsDataGrid.ItemsSource = tmp;
+        }
+        private void Aktualizuj(object a, EventArgs e)
+        {
+            int tmp = (int)((Button)a).CommandParameter;
+            var db = new PrzychodniaEntities();
+            var patient = db.Patients.FirstOrDefault(p => p.idPat == tmp);
+
+            UpdateId.Text = tmp.ToString();
+            Name_input.Text = patient.FirstName;
+            LastName_input.Text = patient.LastName;
+            PESEL_input.Text = patient.PESEL;
+            Phone_input.Text = patient.phoneNb;
+            email_input.Text = patient.mail;
+            Gender_input.Text = patient.gender;
+            City_input.Text = patient.city;
+            PostalCode_input.Text = patient.postalCode;
+            Street_input.Text = patient.street_adress;
+            PatBirthDate_picker.Text = patient.birthDate.ToString();
+        }
+
+        private void UpdatePanient_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var db = new PrzychodniaEntities();
+            var tmp = int.Parse(UpdateId.Text);
+            var patient = db.Patients.First(a => a.idPat == tmp);
+            db.Patients.Attach(patient);
+            patient.FirstName = Name_input.Text;
+            patient.LastName = LastName_input.Text;
+            patient.PESEL = PESEL_input.Text;
+            patient.phoneNb = Phone_input.Text;
+            patient.mail = email_input.Text;
+            patient.gender = Gender_input.Text;
+            patient.city = City_input.Text;
+            patient.birthDate = PatBirthDate_picker.SelectedDate.Value;
+            patient.postalCode = PostalCode_input.Text;
+            patient.street_adress = Street_input.Text;
+
+            db.SaveChanges();
+            Clear();
+            patientsList();
+            MessageBox.Show("Dane zaktualizowano");
+        }
+
+        private void DeletePat_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Czy jesteś pewny?", "VITAMEDICAL", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                var db = new PrzychodniaEntities();
+                var tmp = int.Parse(UpdateId.Text);
+                var patient = db.Patients.First(a => a.idPat == tmp);
+                db.Patients.Remove(patient);
+                db.SaveChanges();
+                Clear();
+                patientsList();
+                MessageBox.Show("Pomyślnie");
+            }
         }
     }
 }

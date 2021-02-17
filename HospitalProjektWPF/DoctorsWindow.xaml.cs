@@ -164,7 +164,6 @@ namespace HospitalProjektWPF
                 var db = new PrzychodniaEntities();
                 var tmp = int.Parse(UpdateId.Text);
                 var doctor = db.Doctors.First(a => a.idDoc == tmp);
-                db.Doctors.Attach(doctor);
                 db.Doctors.Remove(doctor);
                 db.SaveChanges();
                 Clear();
