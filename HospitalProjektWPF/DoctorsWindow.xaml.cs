@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
-using System.Data.Entity;
 
 namespace HospitalProjektWPF
 {
@@ -21,7 +11,7 @@ namespace HospitalProjektWPF
     /// </summary>
     public partial class DoctorsWindow : Window
     {
-       
+
         Doctors doctor = new Doctors();
 
         public DoctorsWindow()
@@ -42,7 +32,7 @@ namespace HospitalProjektWPF
             // przychodniaEntitiesViewSource.Źródło = [ogólne źródło danych]
         }
 
-      
+        
 
         private void AddDoc_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -74,11 +64,23 @@ namespace HospitalProjektWPF
                 return;
             }
             string phone = DocPhone_input.Text;
-            if (phone == "" || phone == "Phone")
+            if (phone == "" || phone.Length != 9)
             {
                 InvalidData_box.Text = "Proszę podać prawidłowy numer telefonu";
                 return;
             }
+            if (doctorsTable.Where(d => d.phoneNb == phone).ToList().Count == 1)
+            {
+                InvalidData_box.Text = "Lekarz z takim numerem telefonu już jest w systemie";
+                return;
+            }
+            
+            if (DocEmail_input.Text.Length == 0||!Regex.IsMatch(DocEmail_input.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+            {
+                InvalidData_box.Text = "Proszę podać prawidłowy adres mailowy";
+                return;
+            }
+            
             string idspec = IdSpec_input.Text;
             int idValue = int.Parse(idspec);
             if (specTable.Where(s => s.idSpec == idValue).ToList().Count != 1)
@@ -94,11 +96,11 @@ namespace HospitalProjektWPF
                 PESEL = DocPESEL_input.Text,
                 phoneNb = DocPhone_input.Text,
                 mail = DocEmail_input.Text,
-                specializations = idValue
+                specializations = idValue,
             };
-            
-           
-            
+
+
+
             db.Doctors.Add(doctor);
             db.SaveChanges();
             Clear();
@@ -121,23 +123,55 @@ namespace HospitalProjektWPF
             objMainMenu.Show();
         }
 
+        private void Aktualizuj(object o, EventArgs e)
+        {
+            int tmp = (int)((Button)o).CommandParameter;
+            var db = new PrzychodniaEntities();
+            var doctor = db.Doctors.FirstOrDefault(a => a.idDoc == tmp);
 
-        //private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    DataGridRow row = sender as DataGridRow;
-        //    var db = new PrzychodniaEntities();
-        //    var doctor = new Doctors();
-        //    doctor.idDoc = Convert.ToInt32(row.idDoc.value);
-        //    doctor = db.Doctors.Where(d => d.idDoc == doctor.idDoc);
-        //    DocName_input.Text = doctor.FirstName;
-        //    DocLastName_input.Text = doctor.LastName;
-        //    DocPESEL_input.Text = doctor.PESEL;
-        //    DocPhone_input.Text = doctor.phoneNb;
-        //    DocEmail_input.Text = doctor.mail;
-        //    IdSpec_input.Text = doctor.specializations;
+            UpdateId.Text = tmp.ToString();
+            DocName_input.Text = doctor.FirstName;
+            DocLastName_input.Text = doctor.LastName;
+            DocPESEL_input.Text = doctor.PESEL;
+            DocPhone_input.Text = doctor.phoneNb;
+            DocEmail_input.Text = doctor.mail;
+            IdSpec_input.Text = doctor.specializations.ToString();
 
+        }
+        private void UpdateDoc_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var db = new PrzychodniaEntities();
+            var tmp = int.Parse(UpdateId.Text);
+            var doctor = db.Doctors.First(a => a.idDoc == tmp);
+            db.Doctors.Attach(doctor);
+            doctor.FirstName = DocName_input.Text;
+            doctor.LastName = DocLastName_input.Text;
+            doctor.PESEL = DocPESEL_input.Text;
+            doctor.phoneNb = DocPhone_input.Text;
+            doctor.mail = DocEmail_input.Text;
+            doctor.specializations = int.Parse(IdSpec_input.Text);
 
+            db.SaveChanges();
+            Clear();
+            dostorsList();
+            MessageBox.Show("Dane zaktualizowano");
+        }
 
-        //}
+        private void DeleteDoc_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Czy jesteś pewny?", "VITAMEDICAL", MessageBoxButton.OKCancel)== MessageBoxResult.OK)
+            {
+                var db = new PrzychodniaEntities();
+                var tmp = int.Parse(UpdateId.Text);
+                var doctor = db.Doctors.First(a => a.idDoc == tmp);
+                db.Doctors.Attach(doctor);
+                db.Doctors.Remove(doctor);
+                db.SaveChanges();
+                Clear();
+                dostorsList();
+                MessageBox.Show("Pomyślnie");
+            }
+         
+        }
     }
 }

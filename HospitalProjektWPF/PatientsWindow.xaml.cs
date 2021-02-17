@@ -61,13 +61,13 @@ namespace HospitalProjektWPF
                 PatInvalidData_box.Text = "Proszę podać prawidłowy PESEL";
                 return;
             }
-            if (patientsTable.Where(d => d.PESEL == pesel).ToList().Count == 1)
+            if (patientsTable.Where(p => p.PESEL == pesel).ToList().Count == 1)
             {
-                PatInvalidData_box.Text = "Lekarz z takim numerem PESEL już jest w systemie";
+                PatInvalidData_box.Text = "Pacjent z takim numerem PESEL już jest w systemie";
                 return;
             }
             string phone = Phone_input.Text;
-            if (phone == "" || phone == "Phone")
+            if (phone == "")
             {
                 PatInvalidData_box.Text = "Proszę podać prawidłowy numer telefonu";
                 return;
@@ -108,7 +108,19 @@ namespace HospitalProjektWPF
         {
             var db = new PrzychodniaEntities();
             patientsDataGrid.AutoGenerateColumns = false;
-            patientsDataGrid.ItemsSource = db.Patients.ToList();
+            var tmp = db.Patients.ToList().Select(a => new {
+                FirstName = a.FirstName,
+                LastName = a.LastName,
+                PESEL = a.PESEL,
+                phoneNb = a.phoneNb,
+                mail = a.mail,
+                gender = a.gender,
+                city = a.city,
+                postalCode = a.postalCode,
+                street_adress = a.street_adress,
+                birthDate = a.birthDate.ToString("yyyy-MM-dd")
+            }).ToList();
+            patientsDataGrid.ItemsSource = tmp;
         }
     }
 }

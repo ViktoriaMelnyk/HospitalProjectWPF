@@ -15,25 +15,19 @@
             <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="500,530,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
             <Label Content="Pacjenci" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Width="206" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="523,10,0,0" VerticalAlignment="Top" Width="122" Source="fracture.png" />
-            <DataGrid x:Name="patientsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="31,134,28,112" RowDetailsVisibilityMode="VisibleWhenSelected" Background="#FF0F7986" SelectionMode="Single">
+            <DataGrid IsReadOnly="True" x:Name="patientsDataGrid" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="31,134,28,112" RowDetailsVisibilityMode="VisibleWhenSelected" Background="#FF0F7986" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="idPatColumn" Binding="{Binding idPat}" Header="id Pat" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToCells"/>
-                    <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToCells"/>
-                    <DataGridTemplateColumn x:Name="birthDateColumn" Header="birth Date" Width="SizeToCells">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding birthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="idPatColumn" Binding="{Binding idPat}" Header="id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="Imę" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Nazwisko" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="birthDateColumn" Binding="{Binding birthDate}" Header="Data Urodzenia" Width="SizeToCells"/>
                     <DataGridTextColumn x:Name="pESELColumn" Binding="{Binding PESEL}" Header="PESEL" Width="SizeToCells"/>
-                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding gender}" Header="gender" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="postalCodeColumn" Binding="{Binding postalCode}" Header="postal Code" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="cityColumn" Binding="{Binding city}" Header="city" Width="SizeToCells"/>
-                    <DataGridTextColumn x:Name="street_adressColumn" Binding="{Binding street_adress}" Header="street adress" Width="SizeToCells"/>
-                    <DataGridTextColumn x:Name="phoneNbColumn" Binding="{Binding phoneNb}" Header="phone Nb" Width="SizeToCells"/>
-                    <DataGridTextColumn x:Name="mailColumn" Binding="{Binding mail}" Header="mail" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding gender}" Header="Płeć" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="postalCodeColumn" Binding="{Binding postalCode}" Header="Kod pocztowy" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="cityColumn" Binding="{Binding city}" Header="Miasto" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="street_adressColumn" Binding="{Binding street_adress}" Header="Adres" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="phoneNbColumn" Binding="{Binding phoneNb}" Header="Telefon" Width="SizeToCells"/>
+                    <DataGridTextColumn x:Name="mailColumn" Binding="{Binding mail}" Header="email" Width="SizeToCells"/>
 
 
                 </DataGrid.Columns>
