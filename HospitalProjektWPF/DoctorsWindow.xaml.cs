@@ -45,7 +45,7 @@ namespace HospitalProjektWPF
             string name = DocName_input.Text;
             if (name == "")
             {
-                InvalidData_box.Text = "Proszę podać imę!";
+                InvalidData_box.Text = "Proszę podać imię!";
                 return;
             }
             string lastName = DocLastName_input.Text;
@@ -87,7 +87,7 @@ namespace HospitalProjektWPF
             int idValue = int.Parse(idspec);
             if (specTable.Where(s => s.idSpec == idValue).ToList().Count != 1)
             {
-                InvalidData_box.Text = "Nie ma takiej specjalizacj";
+                InvalidData_box.Text = "Nie ma takiej specjalizacji";
                 return;
             }
 

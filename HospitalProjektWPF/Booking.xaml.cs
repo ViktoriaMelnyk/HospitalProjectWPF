@@ -68,7 +68,7 @@ namespace HospitalProjektWPF
             }
             if (db.Patients.Where(i => i.idPat == idValue).ToList().Count != 1)
             {
-                ReservInvalidData_box.Text = "Pacjent z takiem id nie jest zarajestrowany";
+                ReservInvalidData_box.Text = "Pacjent z takim id nie jest zarejestrowany";
                 return;
             }
             string idDoc = IdDoc_input.Text;
@@ -87,13 +87,13 @@ namespace HospitalProjektWPF
             }
             if (dateOfVisit.SelectedDate == null)
             {
-                ReservInvalidData_box.Text = "Proszę podać datę wyzyty";
+                ReservInvalidData_box.Text = "Proszę podać datę wizyty";
                 return;
             }
             string time = TimeOfVisit.Text;
             if (time == "")
             {
-                ReservInvalidData_box.Text = "Proszę podać godzinę wyzyty";
+                ReservInvalidData_box.Text = "Proszę podać godzinę wizyty";
                 return;
             }
 
@@ -113,7 +113,7 @@ namespace HospitalProjektWPF
 
             if (exist.FirstOrDefault() != null)
             {
-                ReservInvalidData_box.Text = "Lekarz z takim indeksem już jest zajęty w tym terminie";
+                ReservInvalidData_box.Text = "Lekarz z takim id już jest zajęty w tym terminie";
                 return;
             }
 
@@ -137,7 +137,7 @@ namespace HospitalProjektWPF
             db.SaveChanges();
             Clear();
             reservationsList();
-            MessageBox.Show("Zerezerwowano");
+            MessageBox.Show("Zarezerwowano");
         }
     }
 }

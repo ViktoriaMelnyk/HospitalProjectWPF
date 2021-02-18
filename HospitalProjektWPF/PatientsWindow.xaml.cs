@@ -50,7 +50,7 @@ namespace HospitalProjektWPF
             string name = Name_input.Text;
             if (name == "")
             {
-                PatInvalidData_box.Text = "Proszę podać imę!";
+                PatInvalidData_box.Text = "Proszę podać imię!";
                 return;
             }
             string lastName = LastName_input.Text;
@@ -108,7 +108,7 @@ namespace HospitalProjektWPF
             }
             if (patientsTable.Where(d => d.phoneNb == phone).ToList().Count == 1)
             {
-                PatInvalidData_box.Text = "Lekarz z takim numerem telefonu już jest w systemie";
+                PatInvalidData_box.Text = "Pacjent z takim numerem telefonu już jest w systemie";
                 return;
             }
 
