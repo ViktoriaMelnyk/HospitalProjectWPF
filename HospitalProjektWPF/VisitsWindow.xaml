@@ -5,16 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
-        Title="VisitsWindow" Height="450" Width="800">
-    <Grid>
+        Title="VisitsWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="przychodniaEntitiesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:PrzychodniaEntities}, CreateList=True}"/>
+        <CollectionViewSource x:Key="przychodniaEntitiesVisitsViewSource" Source="{Binding Visits, Source={StaticResource przychodniaEntitiesViewSource}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource przychodniaEntitiesVisitsViewSource}">
         <Grid Height="124" VerticalAlignment="Top" Background="#FF21D0C3">
-            <Label Content="Wizyty" HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="214" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center" Background="White"/>
-            <Label Content="Id Wizyty" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Height="32" Width="118" Background="#FFF0F0F0" HorizontalContentAlignment="Center"  FontSize="16" FontFamily="Bodoni MT"/>
-            <TextBlock x:Name="VisitId_input" HorizontalAlignment="Left" Margin="147,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57" FontSize="16" Opacity="0.7" Background="White" Height="32" FontFamily="Bodoni MT"/>
-            <Button x:Name="Select_btn" Content="Szukaj" HorizontalAlignment="Left" Margin="232,62,0,0" VerticalAlignment="Top" Width="87" Height="32" Background="Red"  Foreground="White" FontFamily="Bodoni MT" FontSize="16"/>
+            <Label Content="Lista Wizyt" HorizontalAlignment="Left" Margin="274,41,0,0" VerticalAlignment="Top" Width="214" FontSize="26" FontFamily="Bodoni MT" Height="42" HorizontalContentAlignment="Center" Background="White" Opacity="0.8"/>
+            <Image HorizontalAlignment="Left" Height="104" Margin="39,10,0,0" VerticalAlignment="Top" Width="128" Source="medical-history.png"/>
         </Grid>
-        <DataGrid x:Name="Visits_table" Margin="0,124,0,64"/>
-        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="627,388,0,0" VerticalAlignment="Top" Width="84" Height="23" Background="#FF009245" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
+        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="624,46,0,0" VerticalAlignment="Top" Width="107" Height="29" Background="#FF0F7986" Foreground="White" FontFamily="Bodoni MT" FontSize="16" Click="MainMenu_btn_Click"/>
+        <DataGrid x:Name="visitsDataGrid"  Background="#FF0F7986" FontFamily="Bodoni MT"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,142,9.6,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idVisColumn" Binding="{Binding idVis}" Header="id" Width="SizeToCells" FontFamily="Bodoni MT" FontSize="16"/>
+                <DataGridTextColumn x:Name="birthDateColumn" Binding="{Binding DateOfVisit}" Header="Data Wizyty" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="timeOfVisitColumn" Binding="{Binding TimeOfVisit}" Header="Godzina Wizyty" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="idPatColumn" Binding="{Binding idPat}" Header="id Pacjenta" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="idDocColumn" Binding="{Binding idDoc}" Header="id Lekarza" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="symptomsColumn" Binding="{Binding Symptoms}" Header="Symptomy" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="diagnosisColumn" Binding="{Binding Diagnosis}" Header="Diagnoza" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="idDisColumn" Binding="{Binding idDis}" Header="id Choroby" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="idPrescrColumn" Binding="{Binding idPrescr}" Header="id Leków" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="sickLeaveColumn" Binding="{Binding sickLeave}" Header="L4" Width="SizeToCells"/>
+                <DataGridTextColumn x:Name="recommendationsColumn" Binding="{Binding recommendations}" Header="Zalecenia" Width="SizeToCells"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
