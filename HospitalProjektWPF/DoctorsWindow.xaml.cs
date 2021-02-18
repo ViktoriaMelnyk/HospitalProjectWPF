@@ -13,7 +13,9 @@ namespace HospitalProjektWPF
     {
 
         Doctors doctor = new Doctors();
-
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public DoctorsWindow()
         {
             InitializeComponent();

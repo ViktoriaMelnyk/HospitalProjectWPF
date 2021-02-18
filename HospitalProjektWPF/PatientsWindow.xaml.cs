@@ -20,6 +20,9 @@ namespace HospitalProjektWPF
     /// </summary>
     public partial class PatientsWindow : Window
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public PatientsWindow()
         {
             InitializeComponent();

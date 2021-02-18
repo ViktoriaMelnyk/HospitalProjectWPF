@@ -9,6 +9,9 @@ namespace HospitalProjektWPF
     /// </summary>
     public partial class Booking : Window
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public Booking()
         {
             InitializeComponent();

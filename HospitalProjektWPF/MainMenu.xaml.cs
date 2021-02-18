@@ -19,6 +19,9 @@ namespace HospitalProjektWPF
     /// </summary>
     public partial class MainMenu : Window
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public MainMenu()
         {
             InitializeComponent();
