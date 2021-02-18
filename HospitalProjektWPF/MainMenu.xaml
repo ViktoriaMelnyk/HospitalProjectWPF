@@ -5,39 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
-        Title="MainMenu" Height="450" Width="800">
+        Title="MainMenu" Height="634.783" Width="1053.913">
     <Grid Background="#FF0F7986" >
 
-        <Grid HorizontalAlignment="Center" Height="189" VerticalAlignment="Center" Width="800" Background="White">
-            <Label Content="Lekarze" HorizontalAlignment="Left" Margin="46,144,0,0" VerticalAlignment="Top" Width="112" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
-            <Label Content="Lista Wizyt" HorizontalAlignment="Left" Margin="631,144,0,0" VerticalAlignment="Top" Width="133" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
-            <Label Content="Rezerwacja Wiyty" HorizontalAlignment="Left" Margin="409,144,0,0" VerticalAlignment="Top" Width="187" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
-            <Label Content="Pacjenci" HorizontalAlignment="Left" Margin="212,144,0,0" VerticalAlignment="Top" Width="164" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
+        <Grid HorizontalAlignment="Center" Height="297" VerticalAlignment="Center" Width="1047" Background="White" Margin="0,152,0.2,155.8">
+            <Label Content="Lekarze" HorizontalAlignment="Left" Margin="57,238,0,0" VerticalAlignment="Top" Width="112" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
+            <Label Content="Lista Wizyt" HorizontalAlignment="Left" Margin="845,238,0,0" VerticalAlignment="Top" Width="133" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
+            <Label Content="Rezerwacja Wizyty" HorizontalAlignment="Left" Margin="546,238,0,0" VerticalAlignment="Top" Width="198" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
+            <Label Content="Pacjenci" HorizontalAlignment="Left" Margin="280,238,0,0" VerticalAlignment="Top" Width="164" FontSize="23" FontFamily="Bodoni MT"  HorizontalContentAlignment="Center"/>
             <Grid/>
-            <Button x:Name="Doctors_btn" Content="Button" HorizontalAlignment="Left" Margin="33,19,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Doctors_btn_Click">
+            <Button x:Name="Doctors_btn" Content="Button" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Height="200" Width="199" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Doctors_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="doctor.png"/>
                 </Button.Background>
 
             </Button>
-            <Button x:Name="Patients_btn1" Content="Button" HorizontalAlignment="Left" Margin="225,19,0,0" VerticalAlignment="Top" Height="120" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Patients_btn1_Click" >
+            <Button x:Name="Patients_btn1" Content="Button" HorizontalAlignment="Left" Margin="260,19,0,0" VerticalAlignment="Top" Height="200" Width="199" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Patients_btn1_Click" >
                 <Button.Background>
                     <ImageBrush ImageSource="fracture.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Visits_shedule" Content="Button" HorizontalAlignment="Left" Margin="421,18,0,0" VerticalAlignment="Top" Height="120" Width="138" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Visits_shedule_Click">
+            <Button x:Name="Visits_shedule" Content="Button" HorizontalAlignment="Left" Margin="528,19,0,0" VerticalAlignment="Top" Height="200" Width="216" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Visits_shedule_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="nurse.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="visit" Content="Button" HorizontalAlignment="Left" Margin="626,19,0,0" VerticalAlignment="Top" Height="119" Width="138" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="visit_Click">
+            <Button x:Name="visit" Content="Button" HorizontalAlignment="Left" Margin="791,19,0,0" VerticalAlignment="Top" Height="200" Width="216" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="visit_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="medical-history.png"/>
                 </Button.Background>
 
             </Button>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="63" Margin="491,10,0,0" VerticalAlignment="Top" Width="290" Source="white.png" />
-        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="649,355,0,0" VerticalAlignment="Top" Width="98" Height="37" Background="#FFFF5B62" Foreground="White" FontFamily="Bodoni MT" FontSize="16" RenderTransformOrigin="0.5,0.5" Click="MainMenu_btn_Click"/>
+        <Image HorizontalAlignment="Left" Height="116" Margin="555,36,0,0" VerticalAlignment="Top" Width="425" Source="white.png" />
+        <Button x:Name="MainMenu_btn" Content="Wstecz" HorizontalAlignment="Left" Margin="835,499,0,0" VerticalAlignment="Top" Width="114" Height="48" Background="#FFFF5B62" Foreground="White" FontFamily="Bodoni MT" FontSize="20" RenderTransformOrigin="0.5,0.5" Click="MainMenu_btn_Click"/>
     </Grid>
 </Window>

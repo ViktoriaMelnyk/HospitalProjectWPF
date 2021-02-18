@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalProjektWPF"
         mc:Ignorable="d"
-        Title="PatientsWindow" Height="634.783" Width="1053.913" Loaded="Window_Loaded">
+        Title="PatientsWindow" Height="634.783" Width="1053.913" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Window.Resources>
         <CollectionViewSource x:Key="przychodniaEntitiesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:PrzychodniaEntities}, CreateList=True}"/>
         <CollectionViewSource x:Key="przychodniaEntitiesPatientsViewSource" Source="{Binding Patients, Source={StaticResource przychodniaEntitiesViewSource}}"/>
